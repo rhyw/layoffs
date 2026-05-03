@@ -40,9 +40,21 @@ A real-time layoff tracking and tech industry news platform. Built with Django, 
 
 ### Prerequisites
 
-- Python 3.11+
-- Redis (for Celery task queue)
-- PostgreSQL (optional — SQLite works for local dev)
+- **Python 3.11+**
+- **Redis** (required for Celery task queue). Install via:
+
+  ```bash
+  # macOS (Homebrew)
+  brew install redis && brew services start redis
+
+  # Linux (Ubuntu/Debian)
+  sudo apt install redis-server && sudo systemctl start redis
+
+  # Docker (any platform)
+  docker run -d -p 6379:6379 redis:7-alpine
+  ```
+
+- **PostgreSQL** (optional — SQLite works for local dev)
 
 ### 1. Clone & Setup
 
@@ -102,6 +114,15 @@ python manage.py seed_datasources
 
 ### 6. Start the App
 
+Make sure Redis is running first:
+
+```bash
+redis-cli ping
+# Expected: PONG
+```
+
+Then start the services:
+
 ```bash
 # In terminal 1: Django dev server
 python manage.py runserver
@@ -112,6 +133,8 @@ celery -A layoffs_tracker worker -l info
 # In terminal 3: Celery beat (optional — schedules periodic tasks)
 celery -A layoffs_tracker beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 ```
+
+> If Celery shows `Cannot connect to redis://localhost:6379/0: Connection refused.`, Redis is not running. Install and start it (see Prerequisites above), or run it via Docker: `docker run -d -p 6379:6379 redis:7-alpine`.
 
 Visit **http://localhost:8000** in your browser.
 
