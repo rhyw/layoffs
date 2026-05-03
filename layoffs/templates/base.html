@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}layoffs ICU{% endblock %}</title>
+    <title>{% block title %}Layoffs latest{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/theme.js' %}" defer></script>
     {% block extra_head %}{% endblock %}
@@ -17,7 +17,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="header__logo-icon">
                     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                 </svg>
-                <span class="header__logo-text">layoffs ICU</span>
+                <span class="header__logo-text">Layoffs latest</span>
             </a>
             <nav class="header__nav" role="navigation">
                 <a href="{% url 'home' %}" class="header__nav-link">Overview</a>
@@ -46,12 +46,12 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                 </svg>
-                <span>layoffs ICU</span>
+                <span>Layoffs latest</span>
             </div>
             <div class="footer__links">
                 <a href="#">Privacy</a>
                 <a href="#">Terms</a>
-                <a href="mailto:support@layoffs.icu">Support</a>
+                <a href="mailto:support@example.com">Support</a>
             </div>
         </div>
     </footer>

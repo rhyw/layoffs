@@ -1,4 +1,4 @@
-# layoffs ICU
+# Layoffs latest
 
 A real-time layoff tracking and tech industry news platform. Built with Django, HTMX, Celery/Redis, and PostgreSQL, powered by DeepSeek LLM for automated data collection and enrichment.
 
