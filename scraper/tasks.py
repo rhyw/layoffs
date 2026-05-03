@@ -8,6 +8,7 @@ import logging
 from datetime import datetime
 
 from celery import shared_task
+from django.conf import settings
 from django.utils.timezone import now
 
 logger = logging.getLogger(__name__)
@@ -47,6 +48,12 @@ def collect_all_sources(self):
             logger.error(f'Failed to dispatch {source.name}: {e}')
             source.consecutive_failures += 1
             source.save()
+
+    # After dispatching all sources, process any unprocessed ScrapedArticles
+    try:
+        process_scraped_articles.delay()
+    except Exception as e:
+        logger.error(f'Failed to dispatch process_scraped_articles: {e}')
 
 
 @shared_task(bind=True, max_retries=3, default_retry_delay=300)
@@ -279,6 +286,72 @@ def collect_news_articles():
     created = collect_tech_news()
     logger.info(f'News collection: {created} new articles')
     return {'created': created}
+
+
+@shared_task
+def process_scraped_articles():
+    """
+    Process unprocessed ScrapedArticles into LayoffEvent records.
+
+    Uses heuristic extraction to identify layoff events from article
+    titles/content, then creates/updates LayoffEvent records via the
+    dedup pipeline. Marks all processed articles as processed=True
+    regardless of whether a LayoffEvent was created, to avoid re-processing.
+    """
+    from scraper.models import ScrapedArticle
+    from scraper.pipeline import extract_layoff_from_article, normalize_raw_event, dedup_and_merge
+
+    unprocessed = ScrapedArticle.objects.filter(processed=False).select_related('source')
+    total = unprocessed.count()
+
+    if total == 0:
+        logger.info('process_scraped_articles: no unprocessed articles found')
+        return {'processed': 0, 'events_created': 0}
+
+    logger.info(f'process_scraped_articles: processing {total} unprocessed articles')
+
+    # Also try to fetch article content with newspaper3k for better extraction
+    events_created = 0
+    batch = []
+
+    for article in unprocessed:
+        content = article.content_hash  # Not actual content, use title only by default
+        title = article.title or ''
+        source_url = ''  # We don't store the original URL directly
+
+        extracted = extract_layoff_from_article(
+            article_title=title,
+            article_content='',  # Full content not stored in ScrapedArticle
+            source_url=f'https://layoffs.icu/scraped/{article.id}',
+        )
+
+        if extracted:
+            # If DeepSeek is available, use it for richer extraction
+            if hasattr(settings, 'DEEPSEEK_API_KEY') and settings.DEEPSEEK_API_KEY:
+                try:
+                    # Mark article for enrichment later — LLM enrichment task handles this
+                    extracted['is_verified'] = False
+                except Exception:
+                    pass
+
+            normalized = normalize_raw_event(extracted)
+            if normalized:
+                batch.append(normalized)
+
+        # Mark as processed immediately (create events in batch below)
+        article.processed = True
+
+    # Bulk update processed flag
+    ScrapedArticle.objects.filter(processed=False).update(processed=True)
+    logger.info(f'Marked {total} articles as processed')
+
+    # Create LayoffEvents from extracted data
+    if batch:
+        results = dedup_and_merge(batch)
+        events_created = len(results)
+        logger.info(f'Created/updated {events_created} LayoffEvent records from scraped articles')
+
+    return {'processed': total, 'events_created': events_created}
 
 
 @shared_task

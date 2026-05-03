@@ -144,6 +144,11 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(hour='*/1', minute='5'),
         'options': {'expires': 300},
     },
+    'process-scraped-articles': {
+        'task': 'scraper.tasks.process_scraped_articles',
+        'schedule': crontab(minute='*/15'),
+        'options': {'expires': 600},
+    },
     'cleanup-stale-data': {
         'task': 'scraper.tasks.cleanup_stale_data',
         'schedule': crontab(hour='3', minute='0'),
