@@ -1,0 +1,27 @@
+[project]
+name = "layoffs-tracker"
+version = "0.1.0"
+description = "A layoff tracking and tech industry news website"
+requires-python = ">=3.11"
+dependencies = [
+    "django>=5.1",
+    "djangorestframework>=3.15",
+    "celery[redis]>=5.4",
+    "django-celery-beat>=2.6",
+    "django-htmx>=1.19",
+    "django-environ>=0.11",
+    "beautifulsoup4>=4.12",
+    "requests>=2.32",
+    "feedparser>=6.0",
+    "newspaper3k>=0.2",
+    "openai>=1.50",
+    "psycopg2-binary>=2.9",
+    "gunicorn>=23.0",
+    "whitenoise>=6.9",
+    "lxml>=5.3",
+    "python-dateutil>=2.9",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.backends._legacy:_Backend"

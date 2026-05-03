@@ -1,0 +1,23 @@
+# Core
+Django>=5.1
+djangorestframework>=3.15
+django-environ>=0.11
+django-htmx>=1.19
+whitenoise>=6.9
+gunicorn>=23.0
+psycopg2-binary>=2.9
+
+# Celery / Task Queue
+celery[redis]>=5.4
+django-celery-beat>=2.6
+
+# Scraping / Data Collection
+beautifulsoup4>=4.12
+requests>=2.32
+feedparser>=6.0
+newspaper3k>=0.2
+lxml>=5.3
+python-dateutil>=2.9
+
+# LLM
+openai>=1.50
