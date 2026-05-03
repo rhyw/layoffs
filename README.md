@@ -62,30 +62,42 @@ REDIS_URL=redis://localhost:6379/0
 DEEPSEEK_API_KEY=sk-your-deepseek-api-key  # optional for dev
 ```
 
-### 2. Install Dependencies
+### 2. Create & Activate Virtual Environment
 
 ```bash
-# Using pip
-pip install -r requirements.txt
+# Using venv (built-in)
+python3 -m venv .venv
+source .venv/bin/activate      # macOS/Linux
+# .venv\Scripts\activate       # Windows
 
-# Or using uv (faster)
-uv pip install -r requirements.txt
+# Using uv (faster)
+uv venv
+source .venv/bin/activate      # macOS/Linux
 ```
 
-### 3. Run Migrations
+Your prompt should now show `(.venv)` at the beginning, confirming the virtual environment is active.
+
+### 3. Install Dependencies
+
+```bash
+# With venv activated:
+pip install -r requirements.txt
+```
+
+### 4. Run Migrations
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 4. Seed Data Sources
+### 5. Seed Data Sources
 
 ```bash
 python manage.py seed_datasources
 ```
 
-### 5. Start the App
+### 6. Start the App
 
 ```bash
 # In terminal 1: Django dev server
