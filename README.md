@@ -141,7 +141,7 @@ python manage.py runserver
 celery -A layoffs_tracker worker -l info
 
 # In terminal 3: Celery beat (optional — schedules periodic tasks)
-celery -A layoffs_tracker beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+celery -A layoffs_tracker beat -l info
 ```
 
 > If Celery shows `Cannot connect to redis://localhost:6379/0: Connection refused.`, Redis is not running. Install and start it (see Prerequisites above), or run it via Docker: `docker run -d -p 6379:6379 redis:7-alpine`.

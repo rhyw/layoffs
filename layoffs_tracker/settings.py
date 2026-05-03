@@ -124,7 +124,32 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+# Celery Beat schedule — defines periodic task intervals in code.
+# Tasks can also be managed at runtime via django-celery-beat admin.
+from celery.schedules import crontab
+CELERY_BEAT_SCHEDULE = {
+    'collect-all-sources': {
+        'task': 'scraper.tasks.collect_all_sources',
+        'schedule': crontab(minute='*/15'),
+        'options': {'expires': 600},
+    },
+    'collect-news-articles': {
+        'task': 'scraper.tasks.collect_news_articles',
+        'schedule': crontab(minute='*/30'),
+        'options': {'expires': 600},
+    },
+    'enrich-pending-events': {
+        'task': 'scraper.tasks.enrich_pending_events',
+        'schedule': crontab(hour='*/1', minute='5'),
+        'options': {'expires': 300},
+    },
+    'cleanup-stale-data': {
+        'task': 'scraper.tasks.cleanup_stale_data',
+        'schedule': crontab(hour='3', minute='0'),
+        'options': {'expires': 3600},
+    },
+}
 
 # DeepSeek LLM Configuration
 DEEPSEEK_API_KEY = env('DEEPSEEK_API_KEY', default='')
