@@ -1,0 +1,192 @@
+[
+  {
+    "model": "layoffs.layoffevent",
+    "pk": 1,
+    "fields": {
+      "company": "Oracle",
+      "headcount": 30000,
+      "percentage": "18.52",
+      "date_reported": "2026-03-31",
+      "source_url": "https://www.reuters.com/technology/oracle-layoffs-2026/",
+      "source_name": "Reuters",
+      "is_ai_related": true,
+      "industry": "Enterprise Software",
+      "location": null,
+      "notes": "Major restructuring with significant workforce reduction as company shifts focus to cloud and AI infrastructure.",
+      "confidence_score": 0.95,
+      "is_verified": true,
+      "date_published": "2026-03-31T12:00:00Z"
+    }
+  },
+  {
+    "model": "layoffs.layoffevent",
+    "pk": 2,
+    "fields": {
+      "company": "Meta Platforms",
+      "headcount": 200,
+      "percentage": null,
+      "date_reported": "2026-04-02",
+      "source_url": "https://www.cnbc.com/2026/04/02/meta-layoffs.html",
+      "source_name": "CNBC",
+      "is_ai_related": false,
+      "industry": "Social Media",
+      "location": null,
+      "notes": "Smaller round of cuts focused on specific teams within the organization.",
+      "confidence_score": 0.9,
+      "is_verified": true,
+      "date_published": "2026-04-02T12:00:00Z"
+    }
+  },
+  {
+    "model": "layoffs.layoffevent",
+    "pk": 3,
+    "fields": {
+      "company": "GoPro",
+      "headcount": 145,
+      "percentage": "23.00",
+      "date_reported": "2026-04-07",
+      "source_url": "https://www.bbc.com/news/technology/gopro-layoffs-2026",
+      "source_name": "BBC",
+      "is_ai_related": false,
+      "industry": "Hardware",
+      "location": null,
+      "notes": "Significant workforce reduction as action camera maker struggles with declining sales.",
+      "confidence_score": 0.9,
+      "is_verified": true,
+      "date_published": "2026-04-07T12:00:00Z"
+    }
+  },
+  {
+    "model": "layoffs.layoffevent",
+    "pk": 4,
+    "fields": {
+      "company": "Pendo",
+      "headcount": 90,
+      "percentage": "10.00",
+      "date_reported": "2026-04-07",
+      "source_url": "https://www.wsj.com/articles/pendo-layoffs-2026",
+      "source_name": "WSJ",
+      "is_ai_related": false,
+      "industry": "SaaS",
+      "location": null,
+      "notes": "Product analytics company reducing workforce amid market repositioning.",
+      "confidence_score": 0.85,
+      "is_verified": true,
+      "date_published": "2026-04-07T12:00:00Z"
+    }
+  },
+  {
+    "model": "layoffs.layoffevent",
+    "pk": 5,
+    "fields": {
+      "company": "Snap Inc",
+      "headcount": 1000,
+      "percentage": "16.00",
+      "date_reported": "2026-04-15",
+      "source_url": "https://www.cnbc.com/2026/04/15/snap-layoffs.html",
+      "source_name": "CNBC",
+      "is_ai_related": true,
+      "industry": "Social Media",
+      "location": null,
+      "notes": "Snapchat parent company cuts staff as part of AI-driven restructuring and cost reduction.",
+      "confidence_score": 0.95,
+      "is_verified": true,
+      "date_published": "2026-04-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "layoffs.layoffevent",
+    "pk": 6,
+    "fields": {
+      "company": "UKG",
+      "headcount": 950,
+      "percentage": "9.50",
+      "date_reported": "2026-04-15",
+      "source_url": "https://www.axios.com/2026/04/15/ukg-layoffs",
+      "source_name": "Axios",
+      "is_ai_related": true,
+      "industry": "Enterprise Software",
+      "location": null,
+      "notes": "HR and workforce management company reducing headcount amid AI automation push.",
+      "confidence_score": 0.9,
+      "is_verified": true,
+      "date_published": "2026-04-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "layoffs.layoffevent",
+    "pk": 7,
+    "fields": {
+      "company": "Shutterfly",
+      "headcount": 80,
+      "percentage": null,
+      "date_reported": "2026-04-16",
+      "source_url": "https://www.sfgate.com/technology/shutterfly-layoffs",
+      "source_name": "San Francisco Chronicle",
+      "is_ai_related": false,
+      "industry": "E-commerce",
+      "location": null,
+      "notes": "Photo printing and personalized products company reduces workforce.",
+      "confidence_score": 0.8,
+      "is_verified": true,
+      "date_published": "2026-04-16T12:00:00Z"
+    }
+  },
+  {
+    "model": "layoffs.layoffevent",
+    "pk": 8,
+    "fields": {
+      "company": "Meta Platforms",
+      "headcount": 8000,
+      "percentage": "10.00",
+      "date_reported": "2026-04-17",
+      "source_url": "https://www.reuters.com/technology/meta-layoffs-8000-2026/",
+      "source_name": "Reuters",
+      "is_ai_related": false,
+      "industry": "Social Media",
+      "location": null,
+      "notes": "Major new round of layoffs affecting approximately 10% of Meta's workforce as part of ongoing efficiency drive.",
+      "confidence_score": 0.95,
+      "is_verified": true,
+      "date_published": "2026-04-17T12:00:00Z"
+    }
+  },
+  {
+    "model": "layoffs.layoffevent",
+    "pk": 9,
+    "fields": {
+      "company": "UKG",
+      "headcount": 950,
+      "percentage": "9.50",
+      "date_reported": "2026-04-23",
+      "source_url": "https://www.calcalistech.com/ukg-layoffs-2026",
+      "source_name": "Calcalistech",
+      "is_ai_related": true,
+      "industry": "Enterprise Software",
+      "location": null,
+      "notes": "Confirmatory reporting on UKG's workforce reduction, emphasizing AI-related restructuring.",
+      "confidence_score": 0.85,
+      "is_verified": true,
+      "date_published": "2026-04-23T12:00:00Z"
+    }
+  },
+  {
+    "model": "layoffs.layoffevent",
+    "pk": 10,
+    "fields": {
+      "company": "Pentera",
+      "headcount": 40,
+      "percentage": "8.00",
+      "date_reported": "2026-04-27",
+      "source_url": "https://www.calcalistech.com/pentera-layoffs-2026",
+      "source_name": "Calcalistech",
+      "is_ai_related": false,
+      "industry": "Cybersecurity",
+      "location": null,
+      "notes": "Israeli cybersecurity company reduces workforce by 8% as part of strategic refocus.",
+      "confidence_score": 0.85,
+      "is_verified": true,
+      "date_published": "2026-04-27T12:00:00Z"
+    }
+  }
+]

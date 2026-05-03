@@ -112,7 +112,17 @@ python manage.py migrate
 python manage.py seed_datasources
 ```
 
-### 6. Start the App
+### 6. (Optional) Load Sample Data
+
+Populate the database with real layoff data scraped from layoffs.icu:
+
+```bash
+python manage.py loaddata layoffs_2026_04
+```
+
+This loads 10 verified layoff events (Oracle, Meta, Snap, UKG, GoPro, and more) so the homepage and dashboard display real data immediately. The fixture is located at `layoffs/fixtures/layoffs_2026_04.json`.
+
+### 7. Start the App
 
 Make sure Redis is running first:
 
