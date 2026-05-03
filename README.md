@@ -80,8 +80,11 @@ Your prompt should now show `(.venv)` at the beginning, confirming the virtual e
 ### 3. Install Dependencies
 
 ```bash
-# With venv activated:
+# With venv activated, using pip:
 pip install -r requirements.txt
+
+# Or using uv (faster):
+uv pip install -r requirements.txt
 ```
 
 ### 4. Run Migrations
