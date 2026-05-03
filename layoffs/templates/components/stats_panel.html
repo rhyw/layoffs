@@ -1,0 +1,14 @@
+<div class="stats-grid">
+    <div class="stat-card">
+        <span class="stat-card__value">{{ total_laid_off|default:"0" }}</span>
+        <span class="stat-card__label">Total Jobs Lost</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-card__value">{{ total_companies|default:"0" }}</span>
+        <span class="stat-card__label">Companies Affected</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-card__value">{{ most_recent|date:"M j, Y"|default:"—" }}</span>
+        <span class="stat-card__label">Most Recent</span>
+    </div>
+</div>

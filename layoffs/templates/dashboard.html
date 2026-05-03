@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard - layoffs ICU{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1 class="dashboard__title">Dashboard</h1>
+    <div class="dashboard__stats"
+         hx-get="/htmx/stats-summary/"
+         hx-trigger="load"
+         hx-swap="innerHTML">
+        <div class="spinner">Loading stats...</div>
+    </div>
+    <div class="dashboard__charts">
+        <div class="chart-card">
+            <h3>Layoffs Over Time</h3>
+            <canvas id="chart-layoffs-over-time"></canvas>
+        </div>
+        <div class="chart-card">
+            <h3>By Industry</h3>
+            <canvas id="chart-by-industry"></canvas>
+        </div>
+        <div class="chart-card chart-card--full">
+            <h3>Top Companies</h3>
+            <canvas id="chart-top-companies"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/charts.js' %}" defer></script>
+{% endblock %}

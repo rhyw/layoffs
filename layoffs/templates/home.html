@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="home-layout">
+    <!-- Recent Disclosures -->
+    <section class="recent-disclosures" aria-label="Recent layoff disclosures">
+        <h2 class="section-title">Recent Disclosures</h2>
+        <div class="table-wrapper"
+             hx-get="/htmx/recent-disclosures/"
+             hx-trigger="every 60s"
+             hx-swap="outerHTML">
+            {% include "components/recent_table.html" %}
+        </div>
+    </section>
+
+    <!-- Community Sidebar -->
+    <aside class="community-sidebar" aria-label="Community">
+        {% include "components/community_sidebar.html" %}
+    </aside>
+
+    <!-- Tech News -->
+    <section class="tech-news" aria-label="Relevant tech news"
+             hx-get="/htmx/tech-news/"
+             hx-trigger="every 120s"
+             hx-swap="outerHTML">
+        {% include "components/news_cards.html" %}
+    </section>
+</div>
+{% endblock %}

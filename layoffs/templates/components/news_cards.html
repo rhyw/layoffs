@@ -1,0 +1,29 @@
+<div class="news-section">
+    <h2 class="section-title">Relevant Tech News</h2>
+    <div class="news-grid">
+        {% for article in news_articles %}
+        <article class="news-card">
+            {% if article.thumbnail_url %}
+            <div class="news-card__image">
+                <img src="{{ article.thumbnail_url }}" alt="" loading="lazy">
+            </div>
+            {% endif %}
+            <div class="news-card__content">
+                <div class="news-card__meta">
+                    <span class="news-card__source">{{ article.source }}</span>
+                    {% if article.topic_tag %}
+                    <span class="badge">{{ article.topic_tag }}</span>
+                    {% endif %}
+                </div>
+                <h3 class="news-card__title">{{ article.title }}</h3>
+                <p class="news-card__snippet">{{ article.snippet }}</p>
+                <a href="{{ article.source_url }}" target="_blank" rel="noopener" class="news-card__link">
+                    read article →
+                </a>
+            </div>
+        </article>
+        {% empty %}
+        <p class="news-card__empty">No news articles yet. Data collection pipelines are being set up.</p>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<table class="disclosures-table">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Job Loss</th>
+            <th>% of Workforce</th>
+            <th>Source</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in layoffs %}
+        <tr class="disclosures-table__row">
+            <td class="disclosures-table__company">
+                <a href="{{ event.source_url }}" target="_blank" rel="noopener">
+                    {{ event.company }}
+                </a>
+                {% if event.is_ai_related %}
+                <span class="badge badge--ai">AI</span>
+                {% endif %}
+            </td>
+            <td>{{ event.headcount|default:"—" }}</td>
+            <td>{{ event.percentage|default:"—" }}{% if event.percentage %}%{% endif %}</td>
+            <td>{{ event.source_name|default:"—" }}</td>
+            <td>{{ event.date_reported|date:"M j" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="disclosures-table__empty">
+                No layoff data available yet. Data collection pipelines are being set up.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
