@@ -20,7 +20,7 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        recent = LayoffEvent.objects.filter(is_verified=True)[:20]
+        recent = LayoffEvent.objects.all()[:20]
         context['layoffs'] = recent
         context['total_laid_off'] = LayoffEvent.objects.aggregate(
             total=Sum('headcount')
@@ -108,7 +108,7 @@ def layoff_stats(request):
 # ── HTMX Partial Views ──
 
 def htmx_recent_disclosures(request):
-    layoffs = LayoffEvent.objects.filter(is_verified=True)[:20]
+    layoffs = LayoffEvent.objects.all()[:20]
     return render(request, 'components/recent_table.html', {'layoffs': layoffs})
 
 

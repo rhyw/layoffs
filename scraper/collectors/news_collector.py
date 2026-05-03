@@ -100,14 +100,14 @@ def _extract_snippet(entry) -> str:
 
 def _parse_date(entry):
     """Parse published date from feed entry."""
-    from datetime import datetime
+    from datetime import datetime, timezone
     from django.utils.timezone import now
     for field in ('published_parsed', 'updated_parsed'):
         parsed = entry.get(field)
         if parsed:
             try:
                 from time import mktime
-                return datetime.fromtimestamp(mktime(parsed))
+                return datetime.fromtimestamp(mktime(parsed), tz=timezone.utc)
             except Exception:
                 pass
     return now()
