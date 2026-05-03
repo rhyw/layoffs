@@ -1,4 +1,4 @@
-.PHONY: dev migrate check shell superuser collectstatic seed test
+.PHONY: dev migrate check shell superuser collectstatic seed test trigger trigger-docker
 
 # ── Local Development ──
 
@@ -55,3 +55,12 @@ superuser-docker:
 
 seed-docker:
 	docker compose exec web python manage.py seed_datasources
+
+# ── Task Triggering ──
+
+# Dispatches all Celery Beat tasks immediately (useful for testing — avoids waiting for cron)
+trigger:
+	python manage.py shell -c "from django.conf import settings as s; from importlib import import_module as im; [print(f'  {n}: dispatched ({getattr(im(p),t).delay().id})') for n,c in s.CELERY_BEAT_SCHEDULE.items() for p,_,t in [c['task'].rpartition('.')]]"
+
+trigger-docker:
+	docker compose exec web python manage.py shell -c "from django.conf import settings as s; from importlib import import_module as im; [print(f'  {n}: dispatched ({getattr(im(p),t).delay().id})') for n,c in s.CELERY_BEAT_SCHEDULE.items() for p,_,t in [c['task'].rpartition('.')]]"
