@@ -29,7 +29,7 @@ if [[ "$1" == gunicorn* ]]; then
     python manage.py migrate --noinput
 
     echo "Seeding data sources..."
-    python manage.py seed_datasources --noinput 2>/dev/null || true
+    python manage.py seed_datasources || true
 
     # Load sample data if DB is empty (idempotent — skips if events exist)
     python manage.py shell -c "
