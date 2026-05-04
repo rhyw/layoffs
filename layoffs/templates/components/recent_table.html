@@ -45,8 +45,8 @@
         <a href="#"
            class="pagination__link"
            hx-get="/htmx/recent-disclosures/?page={{ page_obj.previous_page_number }}"
-           hx-target="closest .table-wrapper"
-           hx-swap="outerHTML">
+           hx-target="#recent-container"
+           hx-swap="innerHTML">
             &laquo; Previous
         </a>
         {% else %}
@@ -60,8 +60,8 @@
             <a href="#"
                class="pagination__link"
                hx-get="/htmx/recent-disclosures/?page={{ n }}"
-               hx-target="closest .table-wrapper"
-               hx-swap="outerHTML">
+               hx-target="#recent-container"
+               hx-swap="innerHTML">
                 {{ n }}
             </a>
             {% endif %}
@@ -71,8 +71,8 @@
         <a href="#"
            class="pagination__link"
            hx-get="/htmx/recent-disclosures/?page={{ page_obj.next_page_number }}"
-           hx-target="closest .table-wrapper"
-           hx-swap="outerHTML">
+           hx-target="#recent-container"
+           hx-swap="innerHTML">
             Next &raquo;
         </a>
         {% else %}

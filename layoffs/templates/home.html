@@ -6,10 +6,10 @@
     <!-- Recent Disclosures -->
     <section class="recent-disclosures" aria-label="Recent layoff disclosures">
         <h2 class="section-title">Recent Disclosures</h2>
-        <div class="table-wrapper"
+        <div id="recent-container" class="table-wrapper"
              hx-get="/htmx/recent-disclosures/"
              hx-trigger="every 60s"
-             hx-swap="outerHTML">
+             hx-swap="innerHTML">
             {% include "components/recent_table.html" %}
         </div>
     </section>
