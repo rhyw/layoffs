@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.core.paginator import Paginator
 from django.db.models import Count, Sum, Avg
 from django.db.models.functions import TruncMonth
 from django.shortcuts import render
@@ -12,6 +13,8 @@ from rest_framework.response import Response
 from .models import LayoffEvent
 from .serializers import LayoffEventSerializer, LayoffStatsSerializer
 
+PAGE_SIZE = 10
+
 
 # ── Django Views ──
 
@@ -20,8 +23,11 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        recent = LayoffEvent.objects.all()[:20]
-        context['layoffs'] = recent
+        paginator = Paginator(LayoffEvent.objects.all(), PAGE_SIZE)
+        page = paginator.get_page(1)
+        context['layoffs'] = page.object_list
+        context['page_obj'] = page
+        context['paginator'] = paginator
         context['total_laid_off'] = LayoffEvent.objects.aggregate(
             total=Sum('headcount')
         )['total'] or 0
@@ -110,8 +116,14 @@ def layoff_stats(request):
 # ── HTMX Partial Views ──
 
 def htmx_recent_disclosures(request):
-    layoffs = LayoffEvent.objects.all()[:20]
-    return render(request, 'components/recent_table.html', {'layoffs': layoffs})
+    page_num = request.GET.get('page', 1)
+    paginator = Paginator(LayoffEvent.objects.all(), PAGE_SIZE)
+    page = paginator.get_page(page_num)
+    return render(request, 'components/recent_table.html', {
+        'layoffs': page.object_list,
+        'page_obj': page,
+        'paginator': paginator,
+    })
 
 
 def htmx_tech_news(request):
