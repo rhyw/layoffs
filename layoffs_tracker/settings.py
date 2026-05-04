@@ -131,22 +131,22 @@ from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     'collect-all-sources': {
         'task': 'scraper.tasks.collect_all_sources',
-        'schedule': crontab(minute='*/15'),
+        'schedule': crontab(hour='0,12', minute='0'),
         'options': {'expires': 600},
     },
     'collect-news-articles': {
         'task': 'scraper.tasks.collect_news_articles',
-        'schedule': crontab(minute='*/30'),
+        'schedule': crontab(hour='0,12', minute='5'),
         'options': {'expires': 600},
     },
     'enrich-pending-events': {
         'task': 'scraper.tasks.enrich_pending_events',
-        'schedule': crontab(hour='*/1', minute='5'),
+        'schedule': crontab(hour='0,12', minute='10'),
         'options': {'expires': 300},
     },
     'process-scraped-articles': {
         'task': 'scraper.tasks.process_scraped_articles',
-        'schedule': crontab(minute='*/15'),
+        'schedule': crontab(hour='0,12', minute='15'),
         'options': {'expires': 600},
     },
     'cleanup-stale-data': {
