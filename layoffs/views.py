@@ -26,6 +26,8 @@ class HomePageView(TemplateView):
             total=Sum('headcount')
         )['total'] or 0
         context['total_companies'] = LayoffEvent.objects.values('company').distinct().count()
+        from news.models import NewsArticle
+        context['news_articles'] = NewsArticle.objects.all()[:8]
         return context
 
 
