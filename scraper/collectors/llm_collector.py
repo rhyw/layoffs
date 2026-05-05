@@ -81,7 +81,7 @@ class LLMCollector:
 
             normalized = []
             for raw in events:
-                raw['source_url'] = raw.get('source_url') or 'https://layoffs.icu/llm-source'
+                raw['source_url'] = raw.get('source_url') or ''
                 raw['date_reported'] = raw.pop('date', None) or today.isoformat()
                 normalized_event = normalize_raw_event(raw)
                 if normalized_event:

@@ -126,7 +126,7 @@ def collect_web_source(self, source_id):
     try:
         resp = requests.get(
             source.url,
-            headers={'User-Agent': 'LayoffsTracker/1.0 (+https://layoffs.icu)'},
+            headers={'User-Agent': 'LayoffsTracker/1.0'},
             timeout=30,
         )
         resp.raise_for_status()
@@ -322,7 +322,7 @@ def process_scraped_articles():
         extracted = extract_layoff_from_article(
             article_title=title,
             article_content='',  # Full content not stored in ScrapedArticle
-            source_url=f'https://layoffs.icu/scraped/{article.id}',
+            source_url='',
         )
 
         if extracted:
