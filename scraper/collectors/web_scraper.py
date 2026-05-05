@@ -10,6 +10,9 @@ import logging
 import re
 from urllib.parse import urljoin
 
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 from django.utils.timezone import now
 
 import requests
@@ -132,6 +135,17 @@ def scrape_web_source(source: DataSource) -> dict:
     try:
         resp = session.get(source.url, timeout=30)
         resp.raise_for_status()
+    except (requests.SSLError, requests.ConnectionError):
+        # Retry once with SSL verification disabled (some CDNs have issues)
+        logger.warning(f'SSL error scraping {source.name}, retrying without verification')
+        try:
+            resp = session.get(source.url, timeout=30, verify=False)
+            resp.raise_for_status()
+        except requests.RequestException as e2:
+            logger.error(f'HTTP error scraping {source.name}: {e2}')
+            source.consecutive_failures += 1
+            source.save()
+            return {'source': source.name, 'found': 0, 'created': 0, 'error': str(e2)}
     except requests.RequestException as e:
         logger.error(f'HTTP error scraping {source.name}: {e}')
         source.consecutive_failures += 1
