@@ -15,6 +15,25 @@ from .serializers import LayoffEventSerializer, LayoffStatsSerializer
 
 PAGE_SIZE = 10
 
+SORT_FIELDS = {
+    'company': 'company',
+    'headcount': 'headcount',
+    'percentage': 'percentage',
+    'source': 'source_name',
+    'date': 'date_reported',
+}
+
+DEFAULT_SORT = 'date'
+DEFAULT_DIR = 'desc'
+
+
+def _apply_sorting(qs, sort, dir):
+    """Apply sort field and direction to a queryset, with validation."""
+    field = SORT_FIELDS.get(sort, SORT_FIELDS[DEFAULT_SORT])
+    if dir == 'desc':
+        field = f'-{field}'
+    return qs.order_by(field)
+
 
 # ── Django Views ──
 
@@ -23,11 +42,16 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        paginator = Paginator(LayoffEvent.objects.all(), PAGE_SIZE)
+        sort = self.request.GET.get('sort', DEFAULT_SORT)
+        dir = self.request.GET.get('dir', DEFAULT_DIR)
+        qs = _apply_sorting(LayoffEvent.objects.all(), sort, dir)
+        paginator = Paginator(qs, PAGE_SIZE)
         page = paginator.get_page(1)
         context['layoffs'] = page.object_list
         context['page_obj'] = page
         context['paginator'] = paginator
+        context['current_sort'] = sort
+        context['current_dir'] = dir
         context['total_laid_off'] = LayoffEvent.objects.aggregate(
             total=Sum('headcount')
         )['total'] or 0
@@ -117,12 +141,17 @@ def layoff_stats(request):
 
 def htmx_recent_disclosures(request):
     page_num = request.GET.get('page', 1)
-    paginator = Paginator(LayoffEvent.objects.all(), PAGE_SIZE)
+    sort = request.GET.get('sort', DEFAULT_SORT)
+    dir = request.GET.get('dir', DEFAULT_DIR)
+    qs = _apply_sorting(LayoffEvent.objects.all(), sort, dir)
+    paginator = Paginator(qs, PAGE_SIZE)
     page = paginator.get_page(page_num)
     return render(request, 'components/recent_table.html', {
         'layoffs': page.object_list,
         'page_obj': page,
         'paginator': paginator,
+        'current_sort': sort,
+        'current_dir': dir,
     })
 
 

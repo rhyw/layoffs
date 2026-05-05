@@ -1,11 +1,66 @@
 <table class="disclosures-table">
     <thead>
         <tr>
-            <th>Company</th>
-            <th>Job Loss</th>
-            <th>% of Workforce</th>
-            <th>Source</th>
-            <th>Date</th>
+            <th class="sortable{% if current_sort == 'company' %} sortable--active{% endif %}">
+                <a href="#"
+                   class="sortable__link"
+                   hx-get="/htmx/recent-disclosures/?sort=company&amp;dir={% if current_sort == 'company' %}{% if current_dir == 'asc' %}desc{% else %}asc{% endif %}{% else %}asc{% endif %}&amp;page=1"
+                   hx-target="#recent-container"
+                   hx-swap="innerHTML">
+                    Company
+                    {% if current_sort == 'company' %}
+                    <span class="sortable__arrow">{% if current_dir == 'asc' %}▲{% else %}▼{% endif %}</span>
+                    {% endif %}
+                </a>
+            </th>
+            <th class="sortable{% if current_sort == 'headcount' %} sortable--active{% endif %}">
+                <a href="#"
+                   class="sortable__link"
+                   hx-get="/htmx/recent-disclosures/?sort=headcount&amp;dir={% if current_sort == 'headcount' %}{% if current_dir == 'asc' %}desc{% else %}asc{% endif %}{% else %}desc{% endif %}&amp;page=1"
+                   hx-target="#recent-container"
+                   hx-swap="innerHTML">
+                    Job Loss
+                    {% if current_sort == 'headcount' %}
+                    <span class="sortable__arrow">{% if current_dir == 'asc' %}▲{% else %}▼{% endif %}</span>
+                    {% endif %}
+                </a>
+            </th>
+            <th class="sortable{% if current_sort == 'percentage' %} sortable--active{% endif %}">
+                <a href="#"
+                   class="sortable__link"
+                   hx-get="/htmx/recent-disclosures/?sort=percentage&amp;dir={% if current_sort == 'percentage' %}{% if current_dir == 'asc' %}desc{% else %}asc{% endif %}{% else %}desc{% endif %}&amp;page=1"
+                   hx-target="#recent-container"
+                   hx-swap="innerHTML">
+                    % of Workforce
+                    {% if current_sort == 'percentage' %}
+                    <span class="sortable__arrow">{% if current_dir == 'asc' %}▲{% else %}▼{% endif %}</span>
+                    {% endif %}
+                </a>
+            </th>
+            <th class="sortable{% if current_sort == 'source' %} sortable--active{% endif %}">
+                <a href="#"
+                   class="sortable__link"
+                   hx-get="/htmx/recent-disclosures/?sort=source&amp;dir={% if current_sort == 'source' %}{% if current_dir == 'asc' %}desc{% else %}asc{% endif %}{% else %}asc{% endif %}&amp;page=1"
+                   hx-target="#recent-container"
+                   hx-swap="innerHTML">
+                    Source
+                    {% if current_sort == 'source' %}
+                    <span class="sortable__arrow">{% if current_dir == 'asc' %}▲{% else %}▼{% endif %}</span>
+                    {% endif %}
+                </a>
+            </th>
+            <th class="sortable{% if current_sort == 'date' %} sortable--active{% endif %}">
+                <a href="#"
+                   class="sortable__link"
+                   hx-get="/htmx/recent-disclosures/?sort=date&amp;dir={% if current_sort == 'date' %}{% if current_dir == 'asc' %}desc{% else %}asc{% endif %}{% else %}desc{% endif %}&amp;page=1"
+                   hx-target="#recent-container"
+                   hx-swap="innerHTML">
+                    Date
+                    {% if current_sort == 'date' %}
+                    <span class="sortable__arrow">{% if current_dir == 'asc' %}▲{% else %}▼{% endif %}</span>
+                    {% endif %}
+                </a>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -44,7 +99,7 @@
         {% if page_obj.has_previous %}
         <a href="#"
            class="pagination__link"
-           hx-get="/htmx/recent-disclosures/?page={{ page_obj.previous_page_number }}"
+           hx-get="/htmx/recent-disclosures/?sort={{ current_sort }}&amp;dir={{ current_dir }}&amp;page={{ page_obj.previous_page_number }}"
            hx-target="#recent-container"
            hx-swap="innerHTML">
             &laquo; Previous
@@ -59,7 +114,7 @@
             {% elif n > page_obj.number|add:"-3" and n < page_obj.number|add:"3" %}
             <a href="#"
                class="pagination__link"
-               hx-get="/htmx/recent-disclosures/?page={{ n }}"
+               hx-get="/htmx/recent-disclosures/?sort={{ current_sort }}&amp;dir={{ current_dir }}&amp;page={{ n }}"
                hx-target="#recent-container"
                hx-swap="innerHTML">
                 {{ n }}
@@ -70,7 +125,7 @@
         {% if page_obj.has_next %}
         <a href="#"
            class="pagination__link"
-           hx-get="/htmx/recent-disclosures/?page={{ page_obj.next_page_number }}"
+           hx-get="/htmx/recent-disclosures/?sort={{ current_sort }}&amp;dir={{ current_dir }}&amp;page={{ page_obj.next_page_number }}"
            hx-target="#recent-container"
            hx-swap="innerHTML">
             Next &raquo;
