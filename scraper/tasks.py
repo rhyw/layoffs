@@ -97,6 +97,7 @@ def collect_rss_feed(self, source_id):
 
         # Create scraped article record (for dedup tracking)
         ScrapedArticle.objects.create(
+            url=url,
             url_hash=url_hash,
             title=title,
             content_hash=hashlib.sha256(content.encode('utf-8')).hexdigest(),
@@ -115,31 +116,14 @@ def collect_rss_feed(self, source_id):
 
 @shared_task(bind=True, max_retries=3, default_retry_delay=300)
 def collect_web_source(self, source_id):
-    """Scrape a web page for layoff data."""
-    from scraper.models import DataSource, ScrapeLog
-    import requests
-    from bs4 import BeautifulSoup
+    """Scrape a web page for layoff-related articles."""
+    from scraper.models import DataSource
+    from scraper.collectors.web_scraper import scrape_web_source
 
     source = DataSource.objects.get(id=source_id)
-    logger.info(f'Scraping web source: {source.name} ({source.url})')
-
     try:
-        resp = requests.get(
-            source.url,
-            headers={'User-Agent': 'LayoffsTracker/1.0'},
-            timeout=30,
-        )
-        resp.raise_for_status()
-
-        soup = BeautifulSoup(resp.text, 'lxml')
-        # Generic extraction — specific selectors per source can be added later
-        logger.info(f'Scraped {source.name}: {len(resp.text)} bytes received')
-
-        source.last_fetched = now()
-        source.consecutive_failures = 0
-        source.save()
-        return {'source': source.name, 'status': 'success'}
-
+        result = scrape_web_source(source)
+        return result
     except Exception as e:
         logger.error(f'Web scrape failed for {source.name}: {e}')
         source.consecutive_failures += 1
@@ -315,14 +299,13 @@ def process_scraped_articles():
     batch = []
 
     for article in unprocessed:
-        content = article.content_hash  # Not actual content, use title only by default
         title = article.title or ''
-        source_url = ''  # We don't store the original URL directly
+        source_url = article.url or ''
 
         extracted = extract_layoff_from_article(
             article_title=title,
-            article_content='',  # Full content not stored in ScrapedArticle
-            source_url='',
+            article_content='',
+            source_url=source_url,
         )
 
         if extracted:

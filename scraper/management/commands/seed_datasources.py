@@ -33,6 +33,12 @@ INITIAL_SOURCES = [
         'url': 'https://api.deepseek.com/v1',
         'interval_minutes': 240,
     },
+    {
+        'name': 'The Verge',
+        'source_type': 'web',
+        'url': 'https://www.theverge.com/tech',
+        'interval_minutes': 30,
+    },
 ]
 
 

@@ -4,7 +4,6 @@
 
 ## High Priority
 
-- [ ] **Web scraper** — `collect_web_source()` fetches HTML but never parses it. Build `scraper/collectors/web_scraper.py` to extract layoff data from known sources using the heuristic pipeline.
 - [ ] **Community CRUD** — No `community/urls.py`, no views, no thread/reply forms. Sidebar stats are hardcoded zeros.
 - [ ] **Layoff detail page** — No `/layoffs/{id}/` route to view a single event's full details.
 - [ ] **User auth UI** — No login/signup in header. User FK exists on models but no way to register.
@@ -25,8 +24,9 @@
 - [x] Project scaffolding (Django, apps, config)
 - [x] Data models (all 7 models + admin)
 - [x] Celery infrastructure (broker, beat, tasks)
-- [x] RSS feed collector (feefparser + keyword filtering)
+- [x] RSS feed collector (feedparser + keyword filtering)
 - [x] LLM-powered collector (DeepSeek: query + extraction + enrichment)
+- [x] Web scraper — parses HTML pages, finds article-like elements, filters by layoff keywords, creates ScrapedArticle records for downstream processing
 - [x] News article collector (The Verge, TechCrunch, Ars, Wired)
 - [x] Dedup & merge pipeline (normalize, dedup, heuristic extraction)
 - [x] Seed datasources management command
@@ -43,3 +43,4 @@
 - [x] Sortable columns (all 5 columns via HTMX)
 - [x] Local HTMX serving (no CDN dependency)
 - [x] Removed layoffs.icu from collector code
+- [x] Schemaless scraping infrastructure with retry/error handling

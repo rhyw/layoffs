@@ -27,6 +27,7 @@ class DataSource(models.Model):
 
 
 class ScrapedArticle(models.Model):
+    url = models.URLField(max_length=1024, blank=True, default='')
     url_hash = models.CharField(max_length=64, unique=True, db_index=True)
     title = models.TextField()
     content_hash = models.CharField(max_length=64, db_index=True)
