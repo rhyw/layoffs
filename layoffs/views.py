@@ -5,7 +5,7 @@ from django.db.models import Count, Sum, Avg
 from django.db.models.functions import TruncMonth
 from django.shortcuts import render
 from django.utils.timezone import now
-from django.views.generic import TemplateView
+from django.views.generic import DetailView, TemplateView
 from rest_framework import viewsets, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -63,6 +63,20 @@ class HomePageView(TemplateView):
 
 class DashboardView(TemplateView):
     template_name = 'dashboard.html'
+
+
+class LayoffDetailView(DetailView):
+    model = LayoffEvent
+    template_name = 'layoff_detail.html'
+    context_object_name = 'event'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_laid_off'] = LayoffEvent.objects.aggregate(
+            total=Sum('headcount')
+        )['total'] or 0
+        context['total_companies'] = LayoffEvent.objects.values('company').distinct().count()
+        return context
 
 
 # ── DRF API Views ──
