@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class LayoffEvent(models.Model):
@@ -16,6 +17,7 @@ class LayoffEvent(models.Model):
     notes = models.TextField(null=True, blank=True)
     confidence_score = models.FloatField(default=0.0)
     is_verified = models.BooleanField(default=False, db_index=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True, editable=False)
 
     class Meta:
         constraints = [
@@ -31,8 +33,20 @@ class LayoffEvent(models.Model):
             models.Index(fields=['-date_reported', 'is_verified']),
         ]
 
+    def _generate_slug(self):
+        base = slugify(self.company)[:200] or 'unknown'
+        base = f'{base}-{self.date_reported}'
+        if self.headcount:
+            base = f'{base}-{self.headcount}'
+        return base
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self._generate_slug()
+        super().save(*args, **kwargs)
+
     def get_absolute_url(self):
-        return reverse('layoff-detail', kwargs={'pk': self.pk})
+        return reverse('layoff-detail', kwargs={'slug': self.slug})
 
     def __str__(self):
         count = f'{self.headcount:,}' if self.headcount else '?'
