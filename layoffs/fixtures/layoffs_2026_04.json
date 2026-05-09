@@ -1,192 +1,322 @@
 [
-  {
-    "model": "layoffs.layoffevent",
-    "pk": 1,
-    "fields": {
-      "company": "Oracle",
-      "headcount": 30000,
-      "percentage": "18.52",
-      "date_reported": "2026-03-31",
-      "source_url": "https://www.reuters.com/technology/oracle-layoffs-2026/",
-      "source_name": "Reuters",
-      "is_ai_related": true,
-      "industry": "Enterprise Software",
-      "location": null,
-      "notes": "Major restructuring with significant workforce reduction as company shifts focus to cloud and AI infrastructure.",
-      "confidence_score": 0.95,
-      "is_verified": true,
-      "date_published": "2026-03-31T12:00:00Z"
-    }
-  },
-  {
-    "model": "layoffs.layoffevent",
-    "pk": 2,
-    "fields": {
-      "company": "Meta Platforms",
-      "headcount": 200,
-      "percentage": null,
-      "date_reported": "2026-04-02",
-      "source_url": "https://www.cnbc.com/2026/04/02/meta-layoffs.html",
-      "source_name": "CNBC",
-      "is_ai_related": false,
-      "industry": "Social Media",
-      "location": null,
-      "notes": "Smaller round of cuts focused on specific teams within the organization.",
-      "confidence_score": 0.9,
-      "is_verified": true,
-      "date_published": "2026-04-02T12:00:00Z"
-    }
-  },
-  {
-    "model": "layoffs.layoffevent",
-    "pk": 3,
-    "fields": {
-      "company": "GoPro",
-      "headcount": 145,
-      "percentage": "23.00",
-      "date_reported": "2026-04-07",
-      "source_url": "https://www.bbc.com/news/technology/gopro-layoffs-2026",
-      "source_name": "BBC",
-      "is_ai_related": false,
-      "industry": "Hardware",
-      "location": null,
-      "notes": "Significant workforce reduction as action camera maker struggles with declining sales.",
-      "confidence_score": 0.9,
-      "is_verified": true,
-      "date_published": "2026-04-07T12:00:00Z"
-    }
-  },
-  {
-    "model": "layoffs.layoffevent",
-    "pk": 4,
-    "fields": {
-      "company": "Pendo",
-      "headcount": 90,
-      "percentage": "10.00",
-      "date_reported": "2026-04-07",
-      "source_url": "https://www.wsj.com/articles/pendo-layoffs-2026",
-      "source_name": "WSJ",
-      "is_ai_related": false,
-      "industry": "SaaS",
-      "location": null,
-      "notes": "Product analytics company reducing workforce amid market repositioning.",
-      "confidence_score": 0.85,
-      "is_verified": true,
-      "date_published": "2026-04-07T12:00:00Z"
-    }
-  },
-  {
-    "model": "layoffs.layoffevent",
-    "pk": 5,
-    "fields": {
-      "company": "Snap Inc",
-      "headcount": 1000,
-      "percentage": "16.00",
-      "date_reported": "2026-04-15",
-      "source_url": "https://www.cnbc.com/2026/04/15/snap-layoffs.html",
-      "source_name": "CNBC",
-      "is_ai_related": true,
-      "industry": "Social Media",
-      "location": null,
-      "notes": "Snapchat parent company cuts staff as part of AI-driven restructuring and cost reduction.",
-      "confidence_score": 0.95,
-      "is_verified": true,
-      "date_published": "2026-04-15T12:00:00Z"
-    }
-  },
-  {
-    "model": "layoffs.layoffevent",
-    "pk": 6,
-    "fields": {
-      "company": "UKG",
-      "headcount": 950,
-      "percentage": "9.50",
-      "date_reported": "2026-04-15",
-      "source_url": "https://www.axios.com/2026/04/15/ukg-layoffs",
-      "source_name": "Axios",
-      "is_ai_related": true,
-      "industry": "Enterprise Software",
-      "location": null,
-      "notes": "HR and workforce management company reducing headcount amid AI automation push.",
-      "confidence_score": 0.9,
-      "is_verified": true,
-      "date_published": "2026-04-15T12:00:00Z"
-    }
-  },
-  {
-    "model": "layoffs.layoffevent",
-    "pk": 7,
-    "fields": {
-      "company": "Shutterfly",
-      "headcount": 80,
-      "percentage": null,
-      "date_reported": "2026-04-16",
-      "source_url": "https://www.sfgate.com/technology/shutterfly-layoffs",
-      "source_name": "San Francisco Chronicle",
-      "is_ai_related": false,
-      "industry": "E-commerce",
-      "location": null,
-      "notes": "Photo printing and personalized products company reduces workforce.",
-      "confidence_score": 0.8,
-      "is_verified": true,
-      "date_published": "2026-04-16T12:00:00Z"
-    }
-  },
-  {
-    "model": "layoffs.layoffevent",
-    "pk": 8,
-    "fields": {
-      "company": "Meta Platforms",
-      "headcount": 8000,
-      "percentage": "10.00",
-      "date_reported": "2026-04-17",
-      "source_url": "https://www.reuters.com/technology/meta-layoffs-8000-2026/",
-      "source_name": "Reuters",
-      "is_ai_related": false,
-      "industry": "Social Media",
-      "location": null,
-      "notes": "Major new round of layoffs affecting approximately 10% of Meta's workforce as part of ongoing efficiency drive.",
-      "confidence_score": 0.95,
-      "is_verified": true,
-      "date_published": "2026-04-17T12:00:00Z"
-    }
-  },
-  {
-    "model": "layoffs.layoffevent",
-    "pk": 9,
-    "fields": {
-      "company": "UKG",
-      "headcount": 950,
-      "percentage": "9.50",
-      "date_reported": "2026-04-23",
-      "source_url": "https://www.calcalistech.com/ukg-layoffs-2026",
-      "source_name": "Calcalistech",
-      "is_ai_related": true,
-      "industry": "Enterprise Software",
-      "location": null,
-      "notes": "Confirmatory reporting on UKG's workforce reduction, emphasizing AI-related restructuring.",
-      "confidence_score": 0.85,
-      "is_verified": true,
-      "date_published": "2026-04-23T12:00:00Z"
-    }
-  },
-  {
-    "model": "layoffs.layoffevent",
-    "pk": 10,
-    "fields": {
-      "company": "Pentera",
-      "headcount": 40,
-      "percentage": "8.00",
-      "date_reported": "2026-04-27",
-      "source_url": "https://www.calcalistech.com/pentera-layoffs-2026",
-      "source_name": "Calcalistech",
-      "is_ai_related": false,
-      "industry": "Cybersecurity",
-      "location": null,
-      "notes": "Israeli cybersecurity company reduces workforce by 8% as part of strategic refocus.",
-      "confidence_score": 0.85,
-      "is_verified": true,
-      "date_published": "2026-04-27T12:00:00Z"
-    }
+{
+  "model": "layoffs.layoffevent",
+  "pk": 1,
+  "fields": {
+    "company": "Oracle",
+    "headcount": 30000,
+    "percentage": "18.52",
+    "date_reported": "2026-03-31",
+    "date_published": "2026-03-31T12:00:00Z",
+    "source_url": "https://www.reuters.com/technology/oracle-layoffs-2026/",
+    "source_name": "Reuters",
+    "is_ai_related": true,
+    "industry": "Enterprise Software",
+    "location": null,
+    "notes": "Major restructuring with significant workforce reduction as company shifts focus to cloud and AI infrastructure.",
+    "confidence_score": 0.95,
+    "is_verified": true,
+    "slug": "oracle-2026-03-31-30000"
   }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 2,
+  "fields": {
+    "company": "Meta Platforms",
+    "headcount": 200,
+    "percentage": null,
+    "date_reported": "2026-04-02",
+    "date_published": "2026-04-02T12:00:00Z",
+    "source_url": "https://www.cnbc.com/2026/04/02/meta-layoffs.html",
+    "source_name": "CNBC",
+    "is_ai_related": false,
+    "industry": "Social Media",
+    "location": null,
+    "notes": "Smaller round of cuts focused on specific teams within the organization.",
+    "confidence_score": 0.9,
+    "is_verified": true,
+    "slug": "meta-platforms-2026-04-02-200"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 3,
+  "fields": {
+    "company": "GoPro",
+    "headcount": 145,
+    "percentage": "23.00",
+    "date_reported": "2026-04-07",
+    "date_published": "2026-04-07T12:00:00Z",
+    "source_url": "https://www.bbc.com/news/technology/gopro-layoffs-2026",
+    "source_name": "BBC",
+    "is_ai_related": false,
+    "industry": "Hardware",
+    "location": null,
+    "notes": "Significant workforce reduction as action camera maker struggles with declining sales.",
+    "confidence_score": 0.9,
+    "is_verified": true,
+    "slug": "gopro-2026-04-07-145"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 4,
+  "fields": {
+    "company": "Pendo",
+    "headcount": 90,
+    "percentage": "10.00",
+    "date_reported": "2026-04-07",
+    "date_published": "2026-04-07T12:00:00Z",
+    "source_url": "https://www.wsj.com/articles/pendo-layoffs-2026",
+    "source_name": "WSJ",
+    "is_ai_related": false,
+    "industry": "SaaS",
+    "location": null,
+    "notes": "Product analytics company reducing workforce amid market repositioning.",
+    "confidence_score": 0.85,
+    "is_verified": true,
+    "slug": "pendo-2026-04-07-90"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 5,
+  "fields": {
+    "company": "Snap Inc",
+    "headcount": 1000,
+    "percentage": "16.00",
+    "date_reported": "2026-04-15",
+    "date_published": "2026-04-15T12:00:00Z",
+    "source_url": "https://www.cnbc.com/2026/04/15/snap-layoffs.html",
+    "source_name": "CNBC",
+    "is_ai_related": true,
+    "industry": "Social Media",
+    "location": null,
+    "notes": "Snapchat parent company cuts staff as part of AI-driven restructuring and cost reduction.",
+    "confidence_score": 0.95,
+    "is_verified": true,
+    "slug": "snap-inc-2026-04-15-1000"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 6,
+  "fields": {
+    "company": "UKG",
+    "headcount": 950,
+    "percentage": "9.50",
+    "date_reported": "2026-04-15",
+    "date_published": "2026-04-15T12:00:00Z",
+    "source_url": "https://www.axios.com/2026/04/15/ukg-layoffs",
+    "source_name": "Axios",
+    "is_ai_related": true,
+    "industry": "Enterprise Software",
+    "location": null,
+    "notes": "HR and workforce management company reducing headcount amid AI automation push.",
+    "confidence_score": 0.9,
+    "is_verified": true,
+    "slug": "ukg-2026-04-15-950"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 7,
+  "fields": {
+    "company": "Shutterfly",
+    "headcount": 80,
+    "percentage": null,
+    "date_reported": "2026-04-16",
+    "date_published": "2026-04-16T12:00:00Z",
+    "source_url": "https://www.sfgate.com/technology/shutterfly-layoffs",
+    "source_name": "San Francisco Chronicle",
+    "is_ai_related": false,
+    "industry": "E-commerce",
+    "location": null,
+    "notes": "Photo printing and personalized products company reduces workforce.",
+    "confidence_score": 0.8,
+    "is_verified": true,
+    "slug": "shutterfly-2026-04-16-80"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 8,
+  "fields": {
+    "company": "Meta Platforms",
+    "headcount": 8000,
+    "percentage": "10.00",
+    "date_reported": "2026-04-17",
+    "date_published": "2026-04-17T12:00:00Z",
+    "source_url": "https://www.reuters.com/technology/meta-layoffs-8000-2026/",
+    "source_name": "Reuters",
+    "is_ai_related": false,
+    "industry": "Social Media",
+    "location": null,
+    "notes": "Major new round of layoffs affecting approximately 10% of Meta's workforce as part of ongoing efficiency drive.",
+    "confidence_score": 0.95,
+    "is_verified": true,
+    "slug": "meta-platforms-2026-04-17-8000"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 9,
+  "fields": {
+    "company": "UKG",
+    "headcount": 950,
+    "percentage": "9.50",
+    "date_reported": "2026-04-23",
+    "date_published": "2026-04-23T12:00:00Z",
+    "source_url": "https://www.calcalistech.com/ukg-layoffs-2026",
+    "source_name": "Calcalistech",
+    "is_ai_related": true,
+    "industry": "Enterprise Software",
+    "location": null,
+    "notes": "Confirmatory reporting on UKG's workforce reduction, emphasizing AI-related restructuring.",
+    "confidence_score": 0.85,
+    "is_verified": true,
+    "slug": "ukg-2026-04-23-950"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 10,
+  "fields": {
+    "company": "Pentera",
+    "headcount": 40,
+    "percentage": "8.00",
+    "date_reported": "2026-04-27",
+    "date_published": "2026-04-27T12:00:00Z",
+    "source_url": "https://www.calcalistech.com/pentera-layoffs-2026",
+    "source_name": "Calcalistech",
+    "is_ai_related": false,
+    "industry": "Cybersecurity",
+    "location": null,
+    "notes": "Israeli cybersecurity company reduces workforce by 8% as part of strategic refocus.",
+    "confidence_score": 0.85,
+    "is_verified": true,
+    "slug": "pentera-2026-04-27-40"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 11,
+  "fields": {
+    "company": "TechCorp",
+    "headcount": 500,
+    "percentage": "12.50",
+    "date_reported": "2026-04-28",
+    "date_published": "2026-05-03T20:15:05.979Z",
+    "source_url": "https://example.com/techcorp-layoffs",
+    "source_name": "TechCrunch",
+    "is_ai_related": true,
+    "industry": "SaaS",
+    "location": null,
+    "notes": "Restructuring to focus on AI products",
+    "confidence_score": 0.95,
+    "is_verified": false,
+    "slug": "techcorp-2026-04-28-500"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 12,
+  "fields": {
+    "company": "DataStream",
+    "headcount": 200,
+    "percentage": "8.00",
+    "date_reported": "2026-04-30",
+    "date_published": "2026-05-03T20:15:05.981Z",
+    "source_url": "https://example.com/datastream-layoffs",
+    "source_name": "Reuters",
+    "is_ai_related": false,
+    "industry": "Data Analytics",
+    "location": null,
+    "notes": "Cost-cutting measures",
+    "confidence_score": 0.9,
+    "is_verified": false,
+    "slug": "datastream-2026-04-30-200"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 13,
+  "fields": {
+    "company": "CloudBase",
+    "headcount": null,
+    "percentage": "15.00",
+    "date_reported": "2026-05-01",
+    "date_published": "2026-05-03T20:15:05.982Z",
+    "source_url": "https://example.com/cloudbase-layoffs",
+    "source_name": "CNBC",
+    "is_ai_related": true,
+    "industry": "Cloud Computing",
+    "location": null,
+    "notes": "Shift to AI-driven services",
+    "confidence_score": 0.9,
+    "is_verified": true,
+    "slug": "cloudbase-2026-05-01"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 14,
+  "fields": {
+    "company": "CloudBase",
+    "headcount": 200,
+    "percentage": "8.00",
+    "date_reported": "2026-04-30",
+    "date_published": "2026-05-03T20:21:36.698Z",
+    "source_url": "https://example.com/cloudbase-layoffs",
+    "source_name": "Reuters",
+    "is_ai_related": false,
+    "industry": "Cloud Computing",
+    "location": null,
+    "notes": "Cost-cutting measures due to market conditions",
+    "confidence_score": 0.9,
+    "is_verified": false,
+    "slug": "cloudbase-2026-04-30-200"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 15,
+  "fields": {
+    "company": "Meta",
+    "headcount": 10,
+    "percentage": null,
+    "date_reported": "2026-05-03",
+    "date_published": "2026-05-03T20:27:19.596Z",
+    "source_url": "https://layoffs.icu/scraped/35",
+    "source_name": "",
+    "is_ai_related": false,
+    "industry": "Social Media",
+    "location": null,
+    "notes": "Meta says it doesn't know its ideal size as it prepares to lay off 10% of its staff - Business Insider",
+    "confidence_score": 0.9,
+    "is_verified": true,
+    "slug": "meta-2026-05-03-10"
+  }
+},
+{
+  "model": "layoffs.layoffevent",
+  "pk": 16,
+  "fields": {
+    "company": "Meta",
+    "headcount": 8000,
+    "percentage": null,
+    "date_reported": "2026-05-03",
+    "date_published": "2026-05-03T20:27:19.597Z",
+    "source_url": "https://layoffs.icu/scraped/31",
+    "source_name": "",
+    "is_ai_related": false,
+    "industry": "Social Media",
+    "location": null,
+    "notes": "Tech layoffs 2026: Meta cuts 8,000 employees, now up to 115,000 people have been laid off across tech industries this year - Yahoo Tech",
+    "confidence_score": 0.9,
+    "is_verified": true,
+    "slug": "meta-2026-05-03-8000"
+  }
+}
 ]
