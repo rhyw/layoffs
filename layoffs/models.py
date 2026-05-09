@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class LayoffEvent(models.Model):
@@ -29,6 +30,9 @@ class LayoffEvent(models.Model):
         indexes = [
             models.Index(fields=['-date_reported', 'is_verified']),
         ]
+
+    def get_absolute_url(self):
+        return reverse('layoff-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         count = f'{self.headcount:,}' if self.headcount else '?'
