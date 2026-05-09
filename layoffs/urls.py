@@ -11,7 +11,7 @@ urlpatterns = [
     # Django views
     path('', views.HomePageView.as_view(), name='home'),
     path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
-    path('layoffs/<int:pk>/', views.LayoffDetailView.as_view(), name='layoff-detail'),
+    path('layoffs/<slug:slug>/', views.LayoffDetailView.as_view(), name='layoff-detail'),
 
     # DRF API
     path('stats/', views.layoff_stats, name='api-stats'),
