@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ event.company }} - Layoff Details - Layoffs latest{% endblock %}
+
+{% block content %}
+<div class="detail-page">
+    <a href="{% url 'home' %}" class="detail-page__back">&larr; Back to overview</a>
+
+    <div class="detail-card">
+        <div class="detail-card__header">
+            <div class="detail-card__title-row">
+                <h1 class="detail-card__company">{{ event.company }}</h1>
+                <div class="detail-card__badges">
+                    {% if event.is_ai_related %}
+                    <span class="badge badge--ai">AI</span>
+                    {% endif %}
+                    {% if event.is_verified %}
+                    <span class="badge badge--verified">Verified</span>
+                    {% endif %}
+                </div>
+            </div>
+            <p class="detail-card__date">Reported {{ event.date_reported|date:"F j, Y" }}</p>
+        </div>
+
+        <div class="detail-card__stats">
+            <div class="detail-stat">
+                <span class="detail-stat__value">
+                    {% if event.headcount %}
+                        {{ event.headcount }}
+                    {% else %}
+                        &mdash;
+                    {% endif %}
+                </span>
+                <span class="detail-stat__label">Jobs Lost</span>
+            </div>
+            <div class="detail-stat">
+                <span class="detail-stat__value">
+                    {% if event.percentage %}
+                        {{ event.percentage }}%
+                    {% else %}
+                        &mdash;
+                    {% endif %}
+                </span>
+                <span class="detail-stat__label">of Workforce</span>
+            </div>
+            <div class="detail-stat">
+                <span class="detail-stat__value">
+                    {% if event.industry %}
+                        {{ event.industry }}
+                    {% else %}
+                        &mdash;
+                    {% endif %}
+                </span>
+                <span class="detail-stat__label">Industry</span>
+            </div>
+            <div class="detail-stat">
+                <span class="detail-stat__value">
+                    {% if event.location %}
+                        {{ event.location }}
+                    {% else %}
+                        &mdash;
+                    {% endif %}
+                </span>
+                <span class="detail-stat__label">Location</span>
+            </div>
+        </div>
+
+        {% if event.notes %}
+        <div class="detail-card__section">
+            <h3 class="detail-card__section-title">Notes</h3>
+            <p class="detail-card__notes">{{ event.notes }}</p>
+        </div>
+        {% endif %}
+
+        <div class="detail-card__meta">
+            <div class="detail-card__meta-item">
+                <span class="detail-card__meta-label">Source</span>
+                <a href="{{ event.source_url }}" target="_blank" rel="noopener" class="detail-card__source-link">
+                    {{ event.source_name|default:"Original article" }}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="detail-card__external-icon">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </a>
+            </div>
+            <div class="detail-card__meta-item">
+                <span class="detail-card__meta-label">Confidence</span>
+                <span class="detail-card__confidence">
+                    <span class="confidence-bar">
+                        <span class="confidence-bar__fill" style="width: {{ event.confidence_score|floatformat:0 }}%"></span>
+                    </span>
+                    {{ event.confidence_score|floatformat:0 }}%
+                </span>
+            </div>
+            <div class="detail-card__meta-item">
+                <span class="detail-card__meta-label">Reported on</span>
+                <span>{{ event.date_published|date:"M j, Y" }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
