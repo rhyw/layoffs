@@ -67,7 +67,7 @@
         {% for event in layoffs %}
         <tr class="disclosures-table__row">
             <td class="disclosures-table__company">
-                <a href="{{ event.source_url }}" target="_blank" rel="noopener">
+                <a href="{{ event.get_absolute_url }}">
                     {{ event.company }}
                 </a>
                 {% if event.is_ai_related %}
