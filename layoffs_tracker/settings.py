@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third-party
+    'corsheaders',
     'rest_framework',
     'django_htmx',
     'django_celery_beat',
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -155,6 +157,13 @@ CELERY_BEAT_SCHEDULE = {
         'options': {'expires': 3600},
     },
 }
+
+# CORS — allow GitHub Pages to fetch from the API
+CORS_ALLOWED_ORIGINS = env.list(
+    'CORS_ALLOWED_ORIGINS',
+    default=['https://myname.github.io'],
+)
+CORS_URLS_REGEX = r'^/api/.*$'
 
 # DeepSeek LLM Configuration
 DEEPSEEK_API_KEY = env('DEEPSEEK_API_KEY', default='')
