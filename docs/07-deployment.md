@@ -25,9 +25,9 @@ Throughout this guide, replace:
 
 Also update the following files with your real values before starting:
 
-- `nginx/default.conf` — `server_name layoffs.yourdomain.com;`
-- `layoffs_tracker/settings.py:164` — `'https://myname.github.io'` → `'https://<your-username>.github.io'`
-- `demo/index.html:86` — the footer link to your domain
+- `nginx/default.conf:7` — `server_name layoffs.yourdomain.com;`
+- `layoffs_tracker/settings.py:174` — `'https://myname.github.io'` → `'https://<your-username>.github.io'`
+- `demo/index.html:39,86,96` — `layoffs.mydomain.com` → `layoffs.yourdomain.com`
 
 ---
 
@@ -161,9 +161,57 @@ Then set **SSL/TLS → Overview → Flexible**. This encrypts traffic between br
 
 ---
 
-## 4. GitHub Pages
+## 4. Configuration Model (No `settings_prod.py`)
 
-### 4.1 Configure Pages
+A separate production settings file is **not needed**. Django settings are handled entirely through environment variables via `django-environ`:
+
+| Setting | Dev (default) | Prod (set in `.env`) |
+|---|---|---|
+| `DEBUG` | `True` | `False` |
+| `ALLOWED_HOSTS` | `localhost, 127.0.0.1` | `layoffs.yourdomain.com` |
+| `DATABASE_URL` | `sqlite:///db.sqlite3` | `postgres://layoffs:...@postgres:5432/layoffs` |
+| `SECRET_KEY` | `django-insecure-change-me` | Random 50-char token |
+| `REDIS_URL` | `redis://localhost:6379/0` | `redis://redis:6379/0` |
+| `CORS_ALLOWED_ORIGINS` | `['https://myname.github.io']` | Same — override if needed |
+
+Additionally, when `DEBUG=False`, the code in `settings.py:162-169` auto-enables production security settings:
+
+```python
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = False          # Cloudflare handles HTTPS
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 3600
+```
+
+No separate file to maintain — setting `DJANGO_DEBUG=False` in `.env` activates everything.
+
+---
+
+## 5. Port Conflicts
+
+This deployment only uses **port 80** on the VPS:
+
+| Port | Service | Purpose |
+|---|---|---|
+| **80** | Host Nginx | Receives HTTP from Cloudflare proxy |
+| **8000** | Docker `web` container | Django/Gunicorn (internal only) |
+
+Port **443 is not touched**. Traffic flow:
+
+```
+Browser ── HTTPS 443 ──► Cloudflare ── HTTP 80 ──► VPS Nginx ──► Docker :8000
+                           (SSL edge)                (plain HTTP)
+```
+
+Cloudflare Flexible SSL terminates HTTPS at their edge and forwards to your VPS over plain HTTP on port 80. An existing service on port 443 runs unaffected.
+
+---
+
+## 6. GitHub Pages
+
+### 6.1 Configure Pages
 
 In your GitHub repository:
 
@@ -172,7 +220,7 @@ In your GitHub repository:
 3. After pushing to `main`, the demo will be available at:
    `https://myname.github.io/layoffs-tracker/`
 
-### 4.2 How It Works
+### 6.2 How It Works
 
 The `demo/index.html` page:
 
@@ -183,7 +231,7 @@ The `demo/index.html` page:
 
 ---
 
-## 5. Automated Deploys (CI/CD)
+## 7. Automated Deploys (CI/CD)
 
 Two GitHub Actions workflows run on every push to `main`:
 
@@ -192,7 +240,7 @@ Two GitHub Actions workflows run on every push to `main`:
 | Deploy demo to Pages | `.github/workflows/deploy-pages.yml` | Copies `demo/` → GitHub Pages |
 | Deploy to VPS | `.github/workflows/deploy-vps.yml` | SSH into VPS, `git pull`, `docker compose up -d --build` |
 
-### 5.1 Configure VPS Deploy Secrets
+### 7.1 Configure VPS Deploy Secrets
 
 In GitHub repo → **Settings → Secrets and variables → Actions**, add:
 
@@ -204,16 +252,15 @@ In GitHub repo → **Settings → Secrets and variables → Actions**, add:
 
 ---
 
-## 6. Version Summary
+## 8. Version Summary
 
 ### Files you must edit before deploying
 
 | File | What to change |
 |---|---|
 | `nginx/default.conf:7` | `server_name layoffs.yourdomain.com;` |
-| `layoffs_tracker/settings.py:164` | `'https://myname.github.io'` → `'https://<your-username>.github.io'` |
-| `demo/index.html:86` | `layoffs.mydomain.com` → `layoffs.yourdomain.com` |
-| `demo/index.html:39,96` | `layoffs.mydomain.com` → `layoffs.yourdomain.com` |
+| `layoffs_tracker/settings.py:174` | `'https://myname.github.io'` → `'https://<your-username>.github.io'` |
+| `demo/index.html:39,86,96` | `layoffs.mydomain.com` → `layoffs.yourdomain.com` |
 
 ### Result URLs
 
